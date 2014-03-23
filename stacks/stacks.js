@@ -21,11 +21,13 @@ Stacks.directive('mbdStack', [function() {
 	console.log('creating mbdStack');
 	return {
 		restrict: 'E',
-		//require: '^stackContainer',
-		scope: {},
+		require: '^stackContainer',
+		scope: {
+			stack: '='
+		},
 		replace: true,
 		template: function(tElement, tAttrs) {
-			return '<div ng-controller="cardContainer"><div ng-view></div></div>';
+			return '<div><div ng-controller="cardContainer"><div ng-view></div></div></div>';
 		},
 		link: function(iElement, iAttrs, controller) {
 			console.log("-> mbdStack.link"); // TESTING
@@ -60,8 +62,10 @@ Stacks.directive('mbdCard', [function() {
 	console.log('creating mbdCard');
 	return {
 		restrict: 'E',
-		//require: '^cardContainer',
-		scope: {},
+		require: '^cardContainer',
+		scope: {
+			card: '='
+		},
 		replace: true,
 		transclude: true,
 		template: function(tElement, tAttrs) {
