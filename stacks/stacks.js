@@ -1,19 +1,74 @@
-console.log("initializing stacks lib ...");
+console.log("initializing stacks module ...");
 
-var Stacks = angular.module('mbd.stacks', []);
+var Stacks = angular.module('mbd.stacks', ['ngResource']);
     
-Stacks.controller('stackController', [function() {
-	console.log('-> stackController');
+// stack container
+
+Stacks.controller('stackContainer', ['$scope', function($scope) {
+	console.log('-> stackContainer'); // TESTING
+	$scope.stacks = {};
 }]);
 
-Stacks.controller('cardController', [function() {
-	console.log('-> cardController');
+// stack view controllers
+
+Stacks.controller('stackController', ['$scope', function($scope) {
+	console.log('-> stackController'); // TESTING
 }]);
 
-Stacks.controller('stackListController', [function() {
-	console.log('-> stackListController');
+// stack view
+
+Stacks.directive('mbdStack', [function() {
+	console.log('-> mbdStack');
+	return {
+		restrict: 'E',
+		require: '^stackContainer',
+		scope: {},
+		replace: true,
+		template: function(tElement, tAttrs) {
+			return '<div ng-controller="cardContainer"><div ng-view></div></div>';
+		},
+		link: function(iElement, iAttrs, controller) {
+			console.log("-> mbdStack.link"); // TESTING
+		}
+	};
 }]);
 
-Stacks.controller('cardListController', [function() {
-	console.log('-> cardListController');
+// card container
+
+Stacks.controller('cardContainer', ['$scope', function($scope) {
+	console.log('-> cardContainer'); // TESTING
+	$scope.cards = [];
+}]);
+
+// card view controllers
+
+Stacks.controller('cardController', ['$scope', function($scope) {
+	console.log('-> cardController'); // TESTING
+}]);
+
+Stacks.controller('stackListController', ['$scope', function($scope) {
+	console.log('-> stackListController'); // TESTING
+}]);
+
+Stacks.controller('cardListController', ['$scope', function($scope) {
+	console.log('-> cardListController'); // TESTING
+}]);
+
+// card view
+
+Stacks.directive('mbdCard', [function() {
+	console.log('-> mbdCard');
+	return {
+		restrict: 'E',
+		require: '^cardContainer',
+		scope: {},
+		replace: true,
+		transclude: true,
+		template: function(tElement, tAttrs) {
+			return '<div ng-transclude></div>';
+		},
+		link: function(iElement, iAttrs, controller) {
+			console.log("-> mbdCard.link"); // TESTING
+		}
+	};
 }]);
