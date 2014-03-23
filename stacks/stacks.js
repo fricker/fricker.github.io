@@ -1,5 +1,3 @@
-'use strict';
-
 console.log("initializing stacks lib ...");
 
 var MBD.Stacks = angular.module('mbd.stacks', []);
